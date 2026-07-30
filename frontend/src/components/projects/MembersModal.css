@@ -1,0 +1,101 @@
+.members-modal {
+  background: white;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.members-section,
+.add-member-section {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.members-section h3,
+.add-member-section h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 16px;
+}
+
+.member-item,
+.add-member-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.member-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.member-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.member-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.member-email {
+  font-size: 13px;
+  color: #666;
+}
+
+.member-role {
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.add-btn,
+.remove-btn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.add-btn {
+  background: #667eea;
+  color: white;
+}
+
+.add-btn:hover {
+  background: #5568d3;
+}
+
+.remove-btn {
+  background: #f44336;
+  color: white;
+}
+
+.remove-btn:hover {
+  background: #d32f2f;
+}
+
+.no-users {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+}

@@ -1,0 +1,24 @@
+.task-description {
+  font-size: 14px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;  /* ← Ye line add karo for compatibility */
+  -webkit-box-orient: vertical;
+}
+
+.task-assignee {
+  font-size: 12px;
+  color: #5e6c84;
+}
+
+.priority-badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+}

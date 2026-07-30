@@ -1,0 +1,95 @@
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.projects-header h1 {
+  margin: 0;
+  color: #333;
+}
+
+.create-btn {
+  width: auto;
+  padding: 12px 24px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state h2 {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.project-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.project-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.project-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.btn-action {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-edit {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.btn-edit:hover {
+  background: #e0e0e0;
+}
+
+.btn-delete {
+  background: #fee;
+  color: #c33;
+}
+
+.btn-delete:hover {
+  background: #fdd;
+}
+
+.project-members-count {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
