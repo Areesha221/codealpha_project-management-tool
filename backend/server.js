@@ -32,10 +32,16 @@ const io = socketIO(server, {
 // Middleware
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, Postman)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) !== -1) {
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://localhost:5173',
+      process.env.CORS_ORIGIN
+    ];
+
+    const isVercelApp = origin && origin.endsWith('.vercel.app');
+    const isRenderApp = origin && origin.endsWith('.onrender.com');
+
+    if (!origin || allowedOrigins.indexOf(origin) !== -1 || isVercelApp || isRenderApp) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));

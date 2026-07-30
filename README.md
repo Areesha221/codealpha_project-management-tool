@@ -93,11 +93,21 @@ A full-stack collaborative project management tool similar to **Trello** and **A
 - **Backend API:** https://projecthub-backend-krez.onrender.com
 - **API Health Check:** https://projecthub-backend-krez.onrender.com/api/health
 
-✨ **Test Credentials:**
-- Email: areeshaaa@gmail.com
-- Password: 11223344
+✨ **Features:**
+- User Authentication (Register/Login)
+- Create & Manage Projects
+- Add Team Members
+- Task Management (Kanban Board)
+- Real-time Updates (WebSockets)
+- Comments on Tasks
+- Responsive Design (Mobile + Desktop)
 
-(Or create your own account)
+**Test it yourself:**
+1. Visit the frontend URL above
+2. Register a new account
+3. Create a project
+4. Add members and tasks
+5. Experience real-time collaboration!
 
 ---
 
