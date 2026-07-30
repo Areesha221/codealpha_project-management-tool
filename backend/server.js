@@ -12,19 +12,40 @@ const commentRoutes = require('./routes/comments');
 
 const app = express();
 const server = http.createServer(app);
+
+// ✅ FIXED: Allowed Origins Array (Local + Production)
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://codealpha-project-management-tool-five.vercel.app', // Tumhara Vercel URL
+  process.env.CORS_ORIGIN // Render environment variable
+].filter(Boolean); // Removes any undefined/null values
+
 const io = socketIO(server, {
   cors: {
-    origin: process.env.NODE_ENV === 'production' ? false : ['http://localhost:3000', 'http://localhost:5173'],
+    origin: allowedOrigins,
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
   }
 });
 
 // Middleware
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? false : ['http://localhost:3000', 'http://localhost:5173'],
-  credentials: true
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -63,10 +84,8 @@ app.get('/api/health', (req, res) => {
 // Database connection and server start
 const startServer = async () => {
   try {
-    // Check if MongoDB URI exists
     if (!process.env.MONGODB_URI) {
       console.error('❌ MONGODB_URI is not defined in .env file');
-      console.error('Please create .env file with MONGODB_URI');
       process.exit(1);
     }
 
@@ -75,15 +94,11 @@ const startServer = async () => {
     
     const PORT = process.env.PORT || 5000;
     server.listen(PORT, () => {
-      console.log(` Server running on port ${PORT}`);
+      console.log(`🚀 Server running on port ${PORT}`);
       console.log(`📡 API: http://localhost:${PORT}/api/health`);
     });
   } catch (error) {
     console.error('❌ Database connection error:', error.message);
-    console.error('\n Common issues:');
-    console.error('1. Check your MongoDB connection string in .env');
-    console.error('2. Make sure MongoDB is running or Atlas cluster is accessible');
-    console.error('3. Check your network whitelist settings in MongoDB Atlas');
     process.exit(1);
   }
 };
