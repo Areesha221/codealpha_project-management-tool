@@ -8,14 +8,17 @@ const MembersModal = ({ project, onClose, onAddMember, onRemoveMember }) => {
     const [availableUsers, setAvailableUsers] = useState([])
     const [loading, setLoading] = useState(false)
 
-    // 🛡️ SAFETY CHECK: Agar user load nahi hua, toh kuch render mat karo
+    // 🛡️ SAFETY: Agar user nahi hai, toh kuch render mat karo
     if (!user) {
         return null 
     }
 
+    // 🛡️ FIX: user.id ya user._id dono ko support karo
+    const currentUserId = String(user.id || user._id)
+
     useEffect(() => {
         loadUsers()
-    }, [project.members, project.owner, user._id])
+    }, [project.members, project.owner, currentUserId])
 
     const loadUsers = async () => {
         try {
@@ -25,17 +28,16 @@ const MembersModal = ({ project, onClose, onAddMember, onRemoveMember }) => {
             const allUsers = response.data.users || []
             console.log('2. All users from DB:', allUsers)
 
-            // 🛡️ SAFETY: Sabhi IDs ko String mein convert karo (ObjectId mismatch fix)
+            // 🛡️ SAFETY: Sabhi IDs ko String mein convert karo
             const ownerId = String(project.owner?._id || '')
             const memberIds = (project.members || []).map(m => String(m._id))
 
             const existingIds = new Set([ownerId, ...memberIds])
             console.log('3. Already in project (Owner + Members):', Array.from(existingIds))
-            console.log('4. Current Logged-in User ID:', String(user._id))
+            console.log('4. Current Logged-in User ID:', currentUserId) // Ab ye undefined nahi hoga!
 
             const filtered = allUsers.filter(u => {
                 const userId = String(u._id)
-                const currentUserId = String(user._id)
 
                 // Current user ko mat dikhao, aur jo pehle se members hain unko bhi mat dikhao
                 return userId !== currentUserId && !existingIds.has(userId)
@@ -51,8 +53,10 @@ const MembersModal = ({ project, onClose, onAddMember, onRemoveMember }) => {
 
     const currentMembers = project.members || []
     
-    // 🛡️ SAFETY: Owner check ko string comparison se karo (100% reliable)
-    const isOwner = String(project.owner?._id) === String(user._id)
+    // 🛡️ FIX: Owner check mein bhi user.id || user._id use karo
+    const isOwner = String(project.owner?._id) === currentUserId
+
+    console.log('Is Owner Check:', isOwner)
 
     return (
         <div className="modal-overlay" onClick={onClose}>

@@ -89,9 +89,15 @@ A full-stack collaborative project management tool similar to **Trello** and **A
 
 ## 🚀 Live Demo
 
-- **Frontend:** https://project-management-tool.vercel.app
-- **Backend API:** https://project-management-backend.onrender.com
-- **API Health Check:** https://project-management-backend.onrender.com/api/health
+- **Frontend:** https://codealpha-project-management-tool-five.vercel.app
+- **Backend API:** https://projecthub-backend-krez.onrender.com
+- **API Health Check:** https://projecthub-backend-krez.onrender.com/api/health
+
+✨ **Test Credentials:**
+- Email: areeshaaa@gmail.com
+- Password: 11223344
+
+(Or create your own account)
 
 ---
 
